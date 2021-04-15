@@ -8,14 +8,16 @@
 ### function
 
 #### getConfig
-##### 功能：拉取运营平台上的配置内容。关于运营平台的具体用法，参见{@link https://iwiki.woa.com/pages/viewpage.action?pageId&#x3D;527948584}
-##### category：配置相关
-##### scope：global
-##### 回参(return)：
+- 功能：拉取运营平台上的配置内容。关于运营平台的具体用法，参见{@link https://iwiki.woa.com/pages/viewpage.action?pageId&#x3D;527948584}
+- category：配置相关
+- scope：global
+
+##### 回参(return):
 
 | 字段名 | 类型 | 含义 |
 | ----- | --- | --- |
-| --- | Promise.&lt;(Object|Array.&lt;Object&gt;)&gt; | 有默认值时，请求失败返回默认值。无默认值时，请求失败返回Promise.reject |
+| --- | Promise.<(Object|Array.<Object>)> | 有默认值时，请求失败返回默认值。无默认值时，请求失败返回Promise.reject |
+
 ##### 入参(params):
 
 | 字段名 | 类型 | 含义 | 默认值 | 是否必传 |
@@ -24,50 +26,75 @@
 | extendAttr | Object | 扩展属性，传给配置服务用于检索哪个版本的配置适用于当前用户。 |  | 否
 | defaultCfg | Object | 默认配置，请求失败返回默认值。 |  | 是
 
+
 ##### 使用示例：
-
-
+```javascript
+<caption>拉取单个配置</caption>
+const cfg = await app.tms.getConfig('/${client}/violation/subscribe', {}, { title: '当前城市不支持订阅'})
+console.log(cfg); // 成功则返回服务端存储的配置，失败返回默认值
+```
+```javascript
+<caption>批量拉取配置</caption>
+const cfgs = await app.tms.getConfig([
+  '/${client}/home/service',
+  '/${client}/home/navbar',
+], {}, [
+  [
+    { caption: '违章代缴', icon: 'violation.png' }
+  ],
+  { title: '晚上好，欢迎~' }
+]);
+console.log(cfgs); // 成功则返回服务端存储的配置，失败返回默认值
+```
 
 ## location
 ### function
 
 #### getLocation
-##### scope：global
-##### 回参(return)：
+- scope：global
+
+##### 回参(return):
 
 | 字段名 | 类型 | 含义 |
 | ----- | --- | --- |
 | --- | promise | 获取的定位结果 |
+
 ##### 入参(params):
 
 | 字段名 | 类型 | 含义 | 默认值 | 是否必传 |
 | ----- | --- | --- | ----- | ----- |
 | type | string | 定位类型 |  | 否
 
+
 #### openSetting
-##### scope：global
-##### 回参(return)：
+- scope：global
+
+##### 回参(return):
 
 | 字段名 | 类型 | 含义 |
 | ----- | --- | --- |
 | --- | promise | 授权页操作状态 |
+
 ##### 入参(params):
 
 | 字段名 | 类型 | 含义 | 默认值 | 是否必传 |
 | ----- | --- | --- | ----- | ----- |
 | scopeKey | string | 授权项 |  | 否
 
+
 ## navigator
 ### function
 
 #### navigateToWebview
-##### 功能：navigateToWebview 方法 跳转到小程序的 web-view 容器打开 H5
-##### scope：global
-##### 回参(return)：
+- 功能：navigateToWebview 方法 跳转到小程序的 web-view 容器打开 H5
+- scope：global
+
+##### 回参(return):
 
 | 字段名 | 类型 | 含义 |
 | ----- | --- | --- |
 | --- | undefined | 无返回值 |
+
 ##### 入参(params):
 
 | 字段名 | 类型 | 含义 | 默认值 | 是否必传 |
@@ -83,4 +110,5 @@
 | setting.navbar | object | 页面导航栏设置 |  | 否
 | setting.navbar.frontColor | string | 导航栏字体颜色 |  | 否
 | setting.navbar.backgroundColor | string | 导航栏背景颜色 |  | 否
+
 
